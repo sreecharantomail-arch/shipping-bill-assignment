@@ -1,4 +1,35 @@
 @theme {
+  --color-slate-300: #cbd5e1;
   --color-slate-700: #334155;
   --color-slate-900: #0f172a;
 }
+
+@utility text-slate-900 {
+  color: #0f172a;
+}
+
+@utility text-slate-700 {
+  color: #334155;
+}
+
+@utility text-slate-300 {
+  color: #cbd5e1;
+}
+
+.text-slate-900 {
+  color: #0f172a !important;
+}
+
+.text-slate-700 {
+  color: #334155 !important;
+}
+
+.text-slate-300 {
+  color: #cbd5e1 !important;
+}
+
+.dark\:text-slate-300:is(.dark *),
+:is(.dark *) .dark\:text-slate-300 {
+  color: #cbd5e1 !important;
+}
+

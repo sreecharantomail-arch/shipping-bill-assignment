@@ -316,34 +316,26 @@ export function BillEditor({ bill }: { bill?: SavedBill }) {
 
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
         {workflowSteps.map((step, index) => {
-          const isShippingBill = step.id === 'shipping-bill'
+          const isActive = step.id === 'shipping-bill' || step.description === 'Current step'
+          const cardClasses = isActive
+            ? 'border-primary-300 bg-primary-50 text-slate-900'
+            : 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-50 text-gray-900 dark:text-white'
+          const titleClasses = isActive ? 'font-semibold text-slate-900' : 'text-gray-900 dark:text-white'
+          const subtitleClasses = isActive ? 'text-slate-700' : 'text-gray-500 dark:text-slate-300'
+          const indicatorClasses = isActive
+            ? 'border-primary-300 border bg-white text-slate-900 shadow-xs'
+            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-slate-200 border'
+
           return (
-            <div
-              key={step.id}
-              className={`rounded-lg border p-3 ${
-                isShippingBill
-                  ? 'border-primary-300 bg-primary-50 text-slate-900'
-                  : 'border-gray-200 bg-gray-50 text-gray-900 dark:text-white'
-              }`}>
-              <div
-                className={`flex items-center gap-2 text-sm font-medium ${
-                  isShippingBill ? 'text-slate-900' : 'text-gray-900 dark:text-white'
-                }`}>
+            <div key={step.id} className={`rounded-lg border p-3 ${cardClasses}`}>
+              <div className="flex items-center gap-2 text-sm font-medium">
                 <span
-                  className={`flex size-6 items-center justify-center rounded-full text-xs font-semibold ${
-                    isShippingBill
-                      ? 'border-primary-200 border bg-white text-slate-900 shadow-xs'
-                      : 'bg-white text-gray-900 dark:bg-gray-800 dark:text-white'
-                  }`}>
+                  className={`flex size-6 items-center justify-center rounded-full text-xs font-semibold ${indicatorClasses}`}>
                   {index + 1}
                 </span>
-                <span className={isShippingBill ? 'font-semibold text-slate-900' : 'text-gray-900 dark:text-white'}>
-                  {step.title}
-                </span>
+                <span className={titleClasses}>{step.title}</span>
               </div>
-              <p className={`ml-8 text-xs ${isShippingBill ? 'text-slate-700' : 'text-gray-500 dark:text-gray-400'}`}>
-                {step.description}
-              </p>
+              <p className={`ml-8 text-xs ${subtitleClasses}`}>{step.description}</p>
             </div>
           )
         })}
